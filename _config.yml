@@ -1,8 +1,8 @@
 # Basic
 title: abbott
-subtitle: A blog-orientation theme for Jekyll
-welcome_message: <a href="https://github.com/onevcat/vno-jekyll" target="_blank">Download the theme</a>
-description: Vno Jekyll is a port of my Ghost theme vno.
+subtitle: 身体和灵魂，必须有一个在地上
+welcome_message: <a href="#" target="_blank">Welcome abbott's world </a>
+description: 分享技术，分享生活
 creator: <a href="http://onev.cat">@onevcat</a>
 
 url: "http://vno.onevcat.com"
@@ -22,7 +22,7 @@ blog_button:
 
 # Navigation buttons in the front page.
 nav:
-    - {title: Projects, description: My Projects, url: 'http://project.onevcat.com'}
+    - {title: Projects, description: My Projects, url: 'https://github.com/jinyb09017/jinyb09017.github.io'}
     # - {title: Another Button, description: A button, url: 'http://example.com'}
 
 # Pagination
@@ -30,9 +30,9 @@ gems: [jekyll-paginate]
 paginate: 10
 paginate_path: "page/:num/"
 
-# Comment
+# Comment 这是disqus的评论系统
 comment:
-    disqus: vno-jekyll
+    disqus: abbott-king
     # duoshuo: 
     
 # Social
@@ -41,7 +41,7 @@ social:
     github: onevcat
     twitter: onevcat
     gplus: 107108267983477358170
-    mail: onev@onevcat.com
+    mail: jyb_96@sina.com
 
 # Google Analytics
 ga:
