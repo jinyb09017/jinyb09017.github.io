@@ -9,18 +9,19 @@
         <i class="fa fa-list btn-mobile-menu__icon"></i>
         <i class="fa fa-angle-up btn-mobile-close__icon hidden"></i>
     </span>
-    
+
     {% include side-panel.html %}
 
     <div class="content-wrapper">
         <div class="content-wrapper__inner">
             {{ content }}
             {% include footer.html %}
+            {% include leancloud-analytics.html %}
         </div>
     </div>
-    
+
     {% include external.html %}
-    
+
   </body>
 
 </html>

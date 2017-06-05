@@ -47,3 +47,8 @@ social:
 ga:
     # id: your_ga_id
     # host: your_host
+
+leancloud:
+  enable: true
+  app_id: n9H2t3VFwwMPqC0rSYfvlJuu-gzGzoHsz
+  app_key: DkeWUHsd9YIYIsnKRg6vw1Lk
