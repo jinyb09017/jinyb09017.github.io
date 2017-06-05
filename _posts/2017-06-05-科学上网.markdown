@@ -89,7 +89,7 @@ VPN代理，是在VPN（Virtual Private Network）[虚拟专用网络](http://ba
 在**KiwiVM Control Panel**面板，在**KiwiVM Extras**下面，可以点击**ShadowSocks Server**一键创建好ShadowSocks Server服务器。然后根据面板里面的说明和相关帐号信息，在本地安装好ShadowSocks 客户端，即可科学上网，无所拘束了。
 ps:如果有兴趣的话，可以自己搭建ShadowSocks Server.
 ### 三、搭建vpn服务
-可以直接参考这篇文章[搬瓦工VPS架设VPN教程](http://blog.csdn.net/hjhjw1991/article/details/45848565)，再简单不过了。
+可以直接参考这篇文章搬瓦工VPS架设VPN教程，再简单不过了。
 ps:这样也可以创建**n多子帐号**贡献给其它朋友们使用，就像小编自己一样。
 
 
