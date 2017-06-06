@@ -17,7 +17,7 @@ cover_color: blue
 
 # The blog button should not be removed.
 blog_button:
-    title: Blog
+    title: Blog列表
     description: Visit blog
 
 # Navigation buttons in the front page.
@@ -25,6 +25,13 @@ nav:
     - {title: Projects, description: My Projects, url: 'https://github.com/jinyb09017/jinyb09017.github.io'}
     # - {title: Another Button, description: A button, url: 'http://example.com'}
 
+categeries:
+    - {title: android, description: 安卓技术, url: '/category/android/index.html'}
+    - {title: javascript, description: javascript技术, url: '/category/javascript/index.html'}
+    - {title: tools, description: 实用工具介绍, url: '/category/tools/index.html'}
+    - {title: talk, description: 技术杂谈, url: '/category/talk/index.html'}
+    - {title: java, description: java技术, url: '/category/java/index.html'}
+    - {title: network, description: 网络协议, url: '/category/network/index.html'}
 # Pagination
 gems: [jekyll-paginate]
 paginate: 10

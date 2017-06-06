@@ -2,6 +2,8 @@
 layout: post
 title: HTTP压缩，浏览器是如何解析的
 date: 2017-06-05 09:32:24.000000000 +09:00
+tags: http 协议 网络
+categories: network
 ---
 
 > 首先，浏览器发送一个请求（request）给web服务器，支持一个压缩格式如（gzip），服务端会将原来的源码压缩之后，通过http响应（response）信息返回给web浏览器，浏览器接收之后，显示出来。
