@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4861632a-37ca-40c5-8a1a-832a153a60da" name="Default" comment="1、添加文章">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/assets/images/myavatar.jpg" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/assets/images/avatar.JPG" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/assets/images/background-cover1.jpg" afterPath="" />
+    <list default="true" id="4861632a-37ca-40c5-8a1a-832a153a60da" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/_posts/2017-06-06-JavaScript中对象的属性.markdown" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_includes/side-panel.html" afterPath="$PROJECT_DIR$/_includes/side-panel.html" />
     </list>
     <ignored path="abbott.github.io.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -29,8 +26,8 @@
             <file leaf-file-name="_config.yml" pinned="false" current-in-tab="true">
               <entry file="file://$PROJECT_DIR$/_config.yml">
                 <provider selected="true" editor-type-id="text-editor">
-                  <state relative-caret-position="259">
-                    <caret line="19" column="17" selection-start-line="19" selection-start-column="17" selection-end-line="19" selection-end-column="17" />
+                  <state relative-caret-position="463">
+                    <caret line="31" column="72" selection-start-line="31" selection-start-column="72" selection-end-line="31" selection-end-column="72" />
                     <folding />
                   </state>
                 </provider>
@@ -47,16 +44,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/category/tools/index.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="68">
-              <caret line="4" column="3" selection-start-line="4" selection-start-column="3" selection-end-line="4" selection-end-column="3" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="category.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/_layouts/category.html">
           <provider selected="true" editor-type-id="text-editor">
@@ -163,12 +150,28 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="side-panel.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="side-panel.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/_includes/side-panel.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="221">
               <caret line="13" column="91" selection-start-line="13" selection-start-column="91" selection-end-line="13" selection-end-column="91" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="2017-06-06-JavaScript中对象的属性.markdown" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/_posts/2017-06-06-JavaScript中对象的属性.markdown">
+          <provider editor-type-id="MarkdownFxPreviewEditor">
+            <state />
+          </provider>
+          <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
+            <state split_layout="FIRST">
+              <first_editor relative-caret-position="205">
+                <caret line="37" column="56" selection-start-line="37" selection-start-column="56" selection-end-line="37" selection-end-column="56" />
+                <folding />
+              </first_editor>
+              <second_editor />
             </state>
           </provider>
         </entry>
@@ -236,6 +239,7 @@
         <option value="$PROJECT_DIR$/_posts/2017-06-05-HTTP 协议中的 Transfer-Encoding.markdown" />
         <option value="$PROJECT_DIR$/_posts/2017-06-06-android国际化.markdown" />
         <option value="$PROJECT_DIR$/_posts/2017-06-06-java泛型知识.markdown" />
+        <option value="$PROJECT_DIR$/_posts/2017-06-06-JavaScript中对象的属性.markdown" />
       </list>
     </option>
   </component>
@@ -460,6 +464,38 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="_site" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="abbott.github.io" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="abbott.github.io" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="_site" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="category" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="abbott.github.io" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="abbott.github.io" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="_posts" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -574,7 +610,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1496633267529</updated>
-      <workItem from="1496633269807" duration="32322000" />
+      <workItem from="1496633269807" duration="32586000" />
     </task>
     <task id="LOCAL-00001" summary="1、初始化博客工程">
       <created>1496634382460</created>
@@ -632,11 +668,18 @@
       <option name="project" value="LOCAL" />
       <updated>1496725518702</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="1、图片处理">
+      <created>1496725772816</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1496725772816</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="32322000" />
+    <option name="totallyTimeSpent" value="32586000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="0" />
@@ -682,7 +725,8 @@
     <MESSAGE value="1、添加tag&#10;2、修改背景等细节" />
     <MESSAGE value="1、添加分类功能" />
     <MESSAGE value="1、添加文章" />
-    <option name="LAST_COMMIT_MESSAGE" value="1、添加文章" />
+    <MESSAGE value="1、图片处理" />
+    <option name="LAST_COMMIT_MESSAGE" value="1、图片处理" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -891,27 +935,19 @@
         <state relative-caret-position="17">
           <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
           <folding>
-            <marker date="1496725753412" expanded="true" signature="3673:3825" ph="..." />
-            <marker date="1496725753412" expanded="true" signature="3732:3820" ph="..." />
-            <marker date="1496725753412" expanded="true" signature="3959:4125" ph="..." />
-            <marker date="1496725753412" expanded="true" signature="4021:4120" ph="..." />
-            <marker date="1496725753412" expanded="true" signature="4259:4409" ph="..." />
-            <marker date="1496725753412" expanded="true" signature="4316:4404" ph="..." />
-            <marker date="1496725753412" expanded="true" signature="4543:4689" ph="..." />
-            <marker date="1496725753412" expanded="true" signature="4599:4684" ph="..." />
-            <marker date="1496725753412" expanded="true" signature="4823:4971" ph="..." />
-            <marker date="1496725753412" expanded="true" signature="4879:4966" ph="..." />
-            <marker date="1496725753412" expanded="true" signature="5105:5257" ph="..." />
-            <marker date="1496725753412" expanded="true" signature="5164:5252" ph="..." />
+            <marker date="1496726019404" expanded="true" signature="3673:3825" ph="..." />
+            <marker date="1496726019404" expanded="true" signature="3732:3820" ph="..." />
+            <marker date="1496726019404" expanded="true" signature="3959:4125" ph="..." />
+            <marker date="1496726019404" expanded="true" signature="4021:4120" ph="..." />
+            <marker date="1496726019404" expanded="true" signature="4259:4409" ph="..." />
+            <marker date="1496726019404" expanded="true" signature="4316:4404" ph="..." />
+            <marker date="1496726019404" expanded="true" signature="4543:4689" ph="..." />
+            <marker date="1496726019404" expanded="true" signature="4599:4684" ph="..." />
+            <marker date="1496726019404" expanded="true" signature="4823:4971" ph="..." />
+            <marker date="1496726019404" expanded="true" signature="4879:4966" ph="..." />
+            <marker date="1496726019404" expanded="true" signature="5105:5257" ph="..." />
+            <marker date="1496726019404" expanded="true" signature="5164:5252" ph="..." />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/_config.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="259">
-          <caret line="19" column="17" selection-start-line="19" selection-start-column="17" selection-end-line="19" selection-end-column="17" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1074,6 +1110,28 @@
         <state relative-caret-position="221">
           <caret line="13" column="91" selection-start-line="13" selection-start-column="91" selection-end-line="13" selection-end-column="91" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/_config.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="463">
+          <caret line="31" column="72" selection-start-line="31" selection-start-column="72" selection-end-line="31" selection-end-column="72" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/_posts/2017-06-06-JavaScript中对象的属性.markdown">
+      <provider editor-type-id="MarkdownFxPreviewEditor">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
+        <state split_layout="FIRST">
+          <first_editor relative-caret-position="205">
+            <caret line="37" column="56" selection-start-line="37" selection-start-column="56" selection-end-line="37" selection-end-column="56" />
+            <folding />
+          </first_editor>
+          <second_editor />
         </state>
       </provider>
     </entry>
