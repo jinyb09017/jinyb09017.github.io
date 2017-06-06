@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Java泛型知识
+title: jekyll Github Pages 博客搭建 并实现评论 阅读量 以及分类功能
 date: 2017-06-06 12:32:24.000000000 +09:00
 categories: talk
 tags: 网站搭建|个人博客
