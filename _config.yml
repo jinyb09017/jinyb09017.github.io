@@ -27,7 +27,7 @@ nav:
 
 categeries:
     - {title: android, description: 安卓技术, url: '/category/android/index.html'}
-    - {title: javascript1, description: javascript技术, url: '/category/javascript1/index.html'}
+    - {title: javascript, description: javascript技术, url: '/category/javascript/index.html'}
     - {title: tools, description: 实用工具介绍, url: '/category/tools/index.html'}
     - {title: talk, description: 技术杂谈, url: '/category/talk/index.html'}
     - {title: java, description: java技术, url: '/category/java/index.html'}
