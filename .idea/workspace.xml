@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4861632a-37ca-40c5-8a1a-832a153a60da" name="Default" comment="1、">
+    <list default="true" id="4861632a-37ca-40c5-8a1a-832a153a60da" name="Default" comment="1、细节修改">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_includes/side-panel.html" afterPath="$PROJECT_DIR$/_includes/side-panel.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_layouts/post.html" afterPath="$PROJECT_DIR$/_layouts/post.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.html" afterPath="$PROJECT_DIR$/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_config.yml" afterPath="$PROJECT_DIR$/_config.yml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_includes/footer.html" afterPath="$PROJECT_DIR$/_includes/footer.html" />
     </list>
     <ignored path="abbott.github.io.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -28,8 +27,8 @@
             <file leaf-file-name="_config.yml" pinned="false" current-in-tab="true">
               <entry file="file://$PROJECT_DIR$/_config.yml">
                 <provider selected="true" editor-type-id="text-editor">
-                  <state relative-caret-position="463">
-                    <caret line="31" column="72" selection-start-line="31" selection-start-column="72" selection-end-line="31" selection-end-column="72" />
+                  <state relative-caret-position="340">
+                    <caret line="20" column="27" selection-start-line="20" selection-start-column="27" selection-end-line="20" selection-end-column="27" />
                     <folding />
                   </state>
                 </provider>
@@ -46,22 +45,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="2017-06-05-Package Control插件管理.markdown" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/_posts/2017-06-05-Package Control插件管理.markdown">
-          <provider editor-type-id="MarkdownFxPreviewEditor">
-            <state />
-          </provider>
-          <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
-            <state split_layout="FIRST">
-              <first_editor relative-caret-position="68">
-                <caret line="4" column="14" selection-start-line="4" selection-start-column="14" selection-end-line="4" selection-end-column="14" />
-                <folding />
-              </first_editor>
-              <second_editor />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="2017-06-05-HTTP压缩，浏览器是如何解析的.markdown" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/_posts/2017-06-05-HTTP压缩，浏览器是如何解析的.markdown">
           <provider editor-type-id="MarkdownFxPreviewEditor">
@@ -117,8 +100,8 @@
           </provider>
           <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
             <state split_layout="FIRST">
-              <first_editor relative-caret-position="246">
-                <caret line="17" column="45" selection-start-line="17" selection-start-column="45" selection-end-line="17" selection-end-column="45" />
+              <first_editor relative-caret-position="161">
+                <caret line="12" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
                 <folding />
               </first_editor>
               <second_editor />
@@ -130,17 +113,27 @@
         <entry file="file://$PROJECT_DIR$/_includes/side-panel.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="340">
-              <caret line="35" column="83" selection-start-line="35" selection-start-column="83" selection-end-line="35" selection-end-column="83" />
+              <caret line="20" column="82" selection-start-line="20" selection-start-column="82" selection-end-line="20" selection-end-column="82" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="post.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="footer.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/_includes/footer.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="119">
+              <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="post.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/_layouts/post.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="289">
-              <caret line="17" column="14" selection-start-line="17" selection-start-column="14" selection-end-line="17" selection-end-column="14" />
+            <state relative-caret-position="323">
+              <caret line="19" column="67" selection-start-line="19" selection-start-column="67" selection-end-line="19" selection-end-column="67" />
               <folding>
                 <element signature="n#style#0;n#div#0;n#header#0;n#article#0;n#!!top" expanded="true" />
               </folding>
@@ -152,7 +145,7 @@
         <entry file="file://$PROJECT_DIR$/_site/index.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="290">
-              <caret line="216" column="16" selection-start-line="216" selection-start-column="16" selection-end-line="216" selection-end-column="16" />
+              <caret line="215" column="16" selection-start-line="215" selection-start-column="16" selection-end-line="215" selection-end-column="16" />
               <folding />
             </state>
           </provider>
@@ -213,7 +206,6 @@
         <option value="$PROJECT_DIR$/category/Javascript/index.html" />
         <option value="$PROJECT_DIR$/_site/2017/06/HTTP-协议中的-Transfer-Encoding/index.html" />
         <option value="$PROJECT_DIR$/category/网络协议/index.html" />
-        <option value="$PROJECT_DIR$/_config.yml" />
         <option value="$PROJECT_DIR$/category/android/index.html" />
         <option value="$PROJECT_DIR$/category/java/index.html" />
         <option value="$PROJECT_DIR$/category/javascript/index.html" />
@@ -232,6 +224,8 @@
         <option value="$PROJECT_DIR$/_includes/side-panel.html" />
         <option value="$PROJECT_DIR$/index.html" />
         <option value="$PROJECT_DIR$/_layouts/post.html" />
+        <option value="$PROJECT_DIR$/_config.yml" />
+        <option value="$PROJECT_DIR$/_includes/footer.html" />
       </list>
     </option>
   </component>
@@ -602,7 +596,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1496633267529</updated>
-      <workItem from="1496633269807" duration="34221000" />
+      <workItem from="1496633269807" duration="35278000" />
     </task>
     <task id="LOCAL-00001" summary="1、初始化博客工程">
       <created>1496634382460</created>
@@ -688,11 +682,18 @@
       <option name="project" value="LOCAL" />
       <updated>1496726367920</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="1、细节修改">
+      <created>1496728949053</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1496728949053</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="34221000" />
+    <option name="totallyTimeSpent" value="35278000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="0" />
@@ -702,7 +703,7 @@
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32936078" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.12351029" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.30010834" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.70964247" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
@@ -741,7 +742,8 @@
     <MESSAGE value="1、图片处理" />
     <MESSAGE value="1、js文章添加" />
     <MESSAGE value="1、目录修正" />
-    <option name="LAST_COMMIT_MESSAGE" value="1、目录修正" />
+    <MESSAGE value="1、细节修改" />
+    <option name="LAST_COMMIT_MESSAGE" value="1、细节修改" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -855,14 +857,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/_includes/footer.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/assets/images/background-cover1.jpg">
       <provider selected="true" editor-type-id="images">
         <state />
@@ -926,18 +920,18 @@
         <state relative-caret-position="17">
           <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
           <folding>
-            <marker date="1496728939553" expanded="true" signature="3673:3677" ph="..." />
-            <marker date="1496728939553" expanded="true" signature="3732:3820" ph="..." />
-            <marker date="1496728939553" expanded="true" signature="3959:4125" ph="..." />
-            <marker date="1496728939553" expanded="true" signature="4021:4120" ph="..." />
-            <marker date="1496728939553" expanded="true" signature="4259:4409" ph="..." />
-            <marker date="1496728939553" expanded="true" signature="4316:4404" ph="..." />
-            <marker date="1496728939553" expanded="true" signature="4543:4689" ph="..." />
-            <marker date="1496728939553" expanded="true" signature="4599:4684" ph="..." />
-            <marker date="1496728939553" expanded="true" signature="4823:4971" ph="..." />
-            <marker date="1496728939553" expanded="true" signature="4879:4966" ph="..." />
-            <marker date="1496728939553" expanded="true" signature="5008:5137" ph="..." />
-            <marker date="1496728939553" expanded="true" signature="5044:5132" ph="..." />
+            <marker date="1496729927825" expanded="true" signature="3640:3644" ph="..." />
+            <marker date="1496729927825" expanded="true" signature="3732:3820" ph="..." />
+            <marker date="1496729927825" expanded="true" signature="3959:4125" ph="..." />
+            <marker date="1496729927825" expanded="true" signature="4021:4120" ph="..." />
+            <marker date="1496729927825" expanded="true" signature="4259:4409" ph="..." />
+            <marker date="1496729927825" expanded="true" signature="4316:4404" ph="..." />
+            <marker date="1496729927825" expanded="true" signature="4543:4689" ph="..." />
+            <marker date="1496729927825" expanded="true" signature="4599:4684" ph="..." />
+            <marker date="1496729927825" expanded="true" signature="4823:4971" ph="..." />
+            <marker date="1496729927825" expanded="true" signature="4879:4966" ph="..." />
+            <marker date="1496729927825" expanded="true" signature="4975:5104" ph="..." />
+            <marker date="1496729927825" expanded="true" signature="5011:5099" ph="..." />
           </folding>
         </state>
       </provider>
@@ -1082,28 +1076,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/_posts/2017-06-06-java泛型知识.markdown">
-      <provider editor-type-id="MarkdownFxPreviewEditor">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
-        <state split_layout="FIRST">
-          <first_editor relative-caret-position="246">
-            <caret line="17" column="45" selection-start-line="17" selection-start-column="45" selection-end-line="17" selection-end-column="45" />
-            <folding />
-          </first_editor>
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/_config.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="463">
-          <caret line="31" column="72" selection-start-line="31" selection-start-column="72" selection-end-line="31" selection-end-column="72" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/_posts/2017-06-06-JavaScript中对象的属性.markdown">
       <provider editor-type-id="MarkdownFxPreviewEditor">
         <state />
@@ -1118,18 +1090,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/_includes/side-panel.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="35" column="83" selection-start-line="35" selection-start-column="83" selection-end-line="35" selection-end-column="83" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/_site/index.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="290">
-          <caret line="216" column="16" selection-start-line="216" selection-start-column="16" selection-end-line="216" selection-end-column="16" />
+          <caret line="215" column="16" selection-start-line="215" selection-start-column="16" selection-end-line="215" selection-end-column="16" />
           <folding />
         </state>
       </provider>
@@ -1144,11 +1108,49 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/_layouts/post.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="17" column="14" selection-start-line="17" selection-start-column="14" selection-end-line="17" selection-end-column="14" />
+        <state relative-caret-position="323">
+          <caret line="19" column="67" selection-start-line="19" selection-start-column="67" selection-end-line="19" selection-end-column="67" />
           <folding>
             <element signature="n#style#0;n#div#0;n#header#0;n#article#0;n#!!top" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/_posts/2017-06-06-java泛型知识.markdown">
+      <provider editor-type-id="MarkdownFxPreviewEditor">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
+        <state split_layout="FIRST">
+          <first_editor relative-caret-position="161">
+            <caret line="12" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
+            <folding />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/_includes/side-panel.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="20" column="82" selection-start-line="20" selection-start-column="82" selection-end-line="20" selection-end-column="82" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/_config.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="20" column="27" selection-start-line="20" selection-start-column="27" selection-end-line="20" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/_includes/footer.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
