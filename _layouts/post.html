@@ -3,25 +3,28 @@ layout: default
 ---
 
 <article class="post-container post-container--single" itemscope itemtype="http://schema.org/BlogPosting">
-  <header class="post-header">
-    <div class="post-meta">
+    <header class="post-header">
+        <h1 class="post-title">{{ page.title }}</h1>
+        <div class="post-meta" style="margin-top: -15px;margin-bottom: 25px">
 
-      <time datetime="{{page.date | date: date_to_xmlschema}}" itemprop="datePublished" class="post-meta__date date">{{page.date | date: "%F"}}</time>
-      {% if site.leancloud.enable %}
+            <time datetime="{{page.date | date: date_to_xmlschema}}" itemprop="datePublished"
+                  class="post-meta__date date">{{page.date | date: "%F"}}
+            </time>
+            {% if site.leancloud.enable %}
        <span id="{{ page.url }}" class="leancloud_visitors" data-flag-title="{{ page.title }}">
-        <span class="post-meta-divider">|</span>
-        <span class="post-meta-item-text"> Hits:  </span>
-        <span class="leancloud-visitors-count"></span>
+        <span class="post-meta-divider tags" ></span>
+        <span class="post-meta-item-text tags">  阅读量:  </span>
+        <span class="leancloud-visitors-count tags"></span>
        </span>
-      {% endif %}
-      <span class="post-meta__tags tags">{{page.tags}}</span>
-    </div>
-    <h1 class="post-title">{{ page.title }}</h1>
-  </header>
+            {% endif %}
+            <span class="post-meta__tags tags">{{page.tags}}</span>
+        </div>
 
-  <section class="post">
-    {{ content }}
-  </section>
+    </header>
+
+    <section class="post">
+        {{ content }}
+    </section>
 </article>
 
 {% include read-more.html %}

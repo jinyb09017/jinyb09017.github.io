@@ -16,9 +16,9 @@ layout: default
                 </time>
                 {% if site.leancloud.enable %}
 				<span id="{{ post.url }}" class="leancloud_visitors" data-flag-title="{{ post.title }}">
-				 <span class="post-meta-divider">|</span>
-				 <span class="post-meta-item-text"> Hits:  </span>
-				 <span class="leancloud-visitors-count"></span>
+				 <span class="post-meta-divider tags"></span>
+				 <span class="post-meta-item-text tags"> 阅读量:  </span>
+				 <span class="leancloud-visitors-count tags"></span>
 				</span>
                 {% endif %}
                 <span class="post-list__meta--tags tags">{{ post.tags }}</span><a class="btn-border-small"
