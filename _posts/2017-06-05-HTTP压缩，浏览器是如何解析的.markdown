@@ -2,7 +2,7 @@
 layout: post
 title: HTTP压缩，浏览器是如何解析的
 date: 2017-06-05 09:32:24.000000000 +09:00
-tags: http 协议 网络
+tags: http协议|网络
 categories: network
 ---
 

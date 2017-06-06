@@ -3,7 +3,7 @@ layout: post
 title: 科学上网
 date: 2017-06-05 09:32:24.000000000 +09:00
 categories: network
-tags: 翻墙 科学上网 
+tags: 翻墙-科学上网
 ---
 
 # 前言

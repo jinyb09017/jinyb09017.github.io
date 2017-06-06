@@ -2,7 +2,7 @@
 layout: post
 title: Package Control插件管理
 date: 2017-06-05 09:32:24.000000000 +09:00
-tags: sublime 工具
+tags: sublime|工具
 categories: tools
 ---
 

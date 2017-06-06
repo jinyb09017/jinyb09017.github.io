@@ -1,0 +1,43 @@
+---
+layout: post
+title: android实用工具高效
+date: 2017-06-06 12:32:24.000000000 +09:00
+categories: android
+tags: android实用工具|高效
+---
+
+### 一 、Android Debug Database
+
+[Android Debug Database](https://github.com/amitshekhariitbhu/Android-Debug-Database)是一个非常酷的开源工具，完全改变了debug 数据库和shared preferences的方式。现在你可以在一个漂亮的界面上查看，编辑，删除数据，以及运行sql语句。
+
+![image](http://www.jcodecraeer.com/uploads/allimg/170526/0223445217-20.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+### 二、[Android WiFi ADB](https://github.com/pedrovgs/AndroidWiFiADB)
+
+有了这个开源的工具，你就可以通过Wi-Fi从Android Studio运行app了。你无需用数据线把设备和电脑连接，享受无线调试带来的乐趣。
+
+
+![image](http://www.jcodecraeer.com/uploads/allimg/170526/022344CK-28.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+
+三、[Scalpel](https://github.com/JakeWharton/scalpel)
+
+Jake Wharton开发的一个非常创新的开源工具，以3d视角浏览整个app的布局情况。
+
+![image](http://www.jcodecraeer.com/uploads/allimg/170526/022344CD-34.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+四、[ADB IDEA](https://github.com/pbreault/adb-idea)
+
+一个开源的Android Studio插件，帮助你在IDE中实现app重启，杀死，清理数据，卸载。
+
+![image](http://www.jcodecraeer.com/uploads/allimg/170526/0223445231-48.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+五、[ClassyShark](http://www.jcodecraeer.com/uploads/allimg/170526/0223441S5-54.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+ClassyShark可以帮助你窥探任何apk获得许多有用的信息，比如 classes, resources, manifest, dependencies, dex count等等。它可以让你了解一个app时做什么的甚至是如何做到的。ClassyShark是开源的。
+
+![image](http://www.jcodecraeer.com/uploads/allimg/170526/0223441S5-54.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+
+refenrence :
+http://www.jcodecraeer.com/a/anzhuokaifa/androidkaifa/2017/0526/7973.html?hmsr=toutiao.io&utm_medium=toutiao.io&utm_source=toutiao.io
