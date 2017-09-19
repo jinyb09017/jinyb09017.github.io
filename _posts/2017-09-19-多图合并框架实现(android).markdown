@@ -1,0 +1,312 @@
+---
+layout: post
+title: 多图合并框架实现
+date: 2017-09-19 12:32:24.000000000 +09:00
+categories: android
+tags: 框架|图片加载
+---
+
+现在多数app里面加入聊天已经是一个非常普遍的现象了，而微信和qq则是通讯领域的鼻祖了。如果产品经理在考虑做聊天设计的时候，多数会参考。
+
+常常你会听到，你看微信和qq都是这么做的，你就这么来吧，虽然心理有一万个不痛快，但谁叫我们是有一个有追求的程序员呢。
+
+所以产品的要求是实现类似微信的群头像。类似如下
+
+
+![多图合并](http://upload-images.jianshu.io/upload_images/2159256-139f238c47917a08.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+
+作为程序员，首先会评估下工作量吧。在产品眼里，就是把图片合成一起嘛，有啥难度吗？所以工作时间决定了你能做成什么样吧
+
+### 方案分析：
+
+**方案1**、直接写成布局，然后按照不同的布局加载不同张数的图片。而大家通用的图片加载方案都是异步加载的，这样的话，加载的时候，会一闪一闪的合并成一张图。由于现在的图片框架都有缓存，第二次会好很多。
+
+**优点：实现起来快**
+
+**缺点：很low，不是一个有逼格程序员的做法，而且效果也不好。**
+
+**方案2**、自定义一个控件，还是通过异步的方式下载所有图片。在控件里面加一个计数器，确保所有图片下载完成后，一起同步显示出来。
+
+**优点：难度适中**
+
+**缺点：扩展性差，哪天产品想换一个合成方案呢**
+
+**方案3**、还是使用原生的控件，对群图像进行合并后生成一个新的图像，原后进行缓存。将合并算法抽象成接口。
+
+**优点：易扩展，体验更好**
+
+**缺点：多花一些时间**
+
+当然啦，作为一个有梦想有逼格的程序员，我们应该考虑实现方案3，并且造福一些被产品折磨的程序猿同胞。
+
+接下来，我来说一下主要思路和关键性代码吧。其实整体上的思路说起来也比较简单，可以用一幅流程图来概括。
+
+![合并图加载逻辑](http://upload-images.jianshu.io/upload_images/2159256-4dda788d264dfb68.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+
+首先，我们知道，程序的输入参数应该是一个ImageView控件，一个urls列表。当然还有一个合并回调函数，用于自定义合并方法。
+
+
+```
+public void displayImages(
+    final List<String> urls,
+    final ImageView imageView, 
+    final MergeCallBack mergeCallBack
+)
+
+```
+
+按照思路，我们需要根据urls生成一个新key,用于缓存合并后的图像，下次就可以直接从缓存中加载。毕竟合并头像是耗时操作
+
+
+```
+    public String getNewUrlByList(List<String> urls, String mark) {
+        StringBuilder sb = new StringBuilder();
+        for (String url : urls) {
+            sb.append(url + mark);
+        }
+
+        return sb.toString();
+    }
+```
+
+这里只是一个简单对所有的url进行了一个拼接，然后再md5.
+
+缓存处理才是最关键的步骤，这里涉及到单个链接图片的缓存和合并图的缓存。对于缓存系统来说，单张图和多张图是同样对待的，都是一个key对应一个缓存对象。只是key的规则稍有不同。
+
+而缓存方案也是通用的DiskLruCache和MemoryLruCache实现的二级缓存，这样可以保持缓存的高效。（关于Lru算法，就是简单的Least Recently Used,即最近使用原则，具体不清楚请百度 ）
+
+我们来看下displayImages的核心代码，就是先找内存缓存，然后再找磁盘缓存，如果都没有，则再同步的找到所有的单张图片
+
+
+```
+    public void displayImages(final List<String> urls, final ImageView imageView, final MergeCallBack mergeCallBack, final int dstWidth, final int dstHeight) {
+        if (urls == null || urls.size() <= 0) {
+            throw new IllegalArgumentException("url不能为空");
+        }
+
+        if (mergeCallBack == null) {
+            throw new IllegalArgumentException("mergeCallBack 不能为空");
+        }
+        final String url = getNewUrlByList(urls, mergeCallBack.getMark());
+
+        imageView.setTag(IMG_URL, url);
+        //内存中加载
+        Bitmap bitmap = loadFromMemory(url);
+        if (bitmap != null) {
+            LogUtil.e(Tag, "displayImages this is from Memory");
+            imageView.setImageBitmap(bitmap);
+            return;
+        }
+
+        try {
+            //磁盘中加载
+            bitmap = loadFromDiskCache(url, dstWidth, dstHeight);
+            if (bitmap != null) {
+                LogUtil.e(Tag, "displayImages this is from Disk");
+                imageView.setImageBitmap(bitmap);
+                return;
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        //设置一张默认图
+        bitmap = BitmapFactory.decodeResource(mContext.getResources(), R.drawable.ic_launcher_round);
+        imageView.setImageBitmap(bitmap);
+        LogUtil.e(Tag, "displayImages this is from default");
+        //开启一个新的线程，同步加载所有的图片。如果加载成功，则返回。
+        Runnable loadBitmapTask = new Runnable() {
+            @Override
+            public void run() {
+                ArrayList<Bitmap> bitmaps = loadBitMaps(urls, dstWidth, dstHeight);
+                if (bitmaps != null && bitmaps.size() > 0) {
+                    Result result;
+                    if (mergeCallBack != null) {
+                        Bitmap mergeBitmap = mergeCallBack.merge(bitmaps, mContext, imageView);
+                        if (urls.size() == bitmaps.size()) {
+                            //加入缓存
+                            try {
+                                saveDru(url, mergeBitmap);
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        } else {
+                            LogUtil.e(Tag, "size change. so can not save");
+                        }
+                        LogUtil.e(Tag, "displayImages this is from Merge");
+                        result = new Result(mergeBitmap, url, imageView);
+                    } else {
+                        result = new Result(bitmaps.get(0), url, imageView);
+                    }
+                    Message msg = mMainHandler.obtainMessage(MESSAGE_SEND_RESULT, result);
+                    msg.sendToTarget();
+                }
+            }
+        };
+
+        threadPoolExecutor.execute(loadBitmapTask);
+    }
+```
+如果从缓存中加载失败，我们会开启一个线程，去执行头像合并的操作。那头像合并是同步操作，需要得到需要合并头像的对象，那如何得到呢，我们继续看代码
+```
+    private ArrayList<Bitmap> loadBitMaps(List<String> urls, int dstWidth, int dstHeight) {
+        ArrayList<Bitmap> bitmaps = new ArrayList<>();
+        for (String url : urls) {
+            //同步获得所有图像
+            Bitmap bitmap = loadBitMap(url, dstWidth, dstHeight);
+            if (bitmap != null) {
+                bitmaps.add(bitmap);
+            }
+        }
+        return bitmaps;
+    }
+```
+显示，图像是通过loadBitMap()函数返回，而这个函数的核心方法是
+```
+    private Bitmap loadBitMap(String url, int dstWidth, int dstHeight) {
+        //内存
+        Bitmap bitmap = loadFromMemory(url);
+        if (bitmap != null) {
+            LogUtil.e(Tag, "this is from Memory");
+            return bitmap;
+        }
+
+        try {
+            //磁盘
+            bitmap = loadFromDiskCache(url, dstWidth, dstHeight);
+            if (bitmap != null) {
+                LogUtil.e(Tag, "this is from Disk");
+                return bitmap;
+            }
+            //网络
+            bitmap = loadFromNet(url, dstWidth, dstHeight);
+            LogUtil.e(Tag, "this is from Net");
+            if (bitmap == null) {
+                LogUtil.e(Tag, "bitmap null network error");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return bitmap;
+    }
+```
+可以清楚的看到，又返回了displayImages()方法的逻辑中，套用了同样的缓存思路。我们再回到loadBitmapTask这个线程的执行方法中，其中有一段重要的逻辑是
+```
+Bitmap mergeBitmap = mergeCallBack.merge(bitmaps, mContext, imageView);
+if (urls.size() == bitmaps.size()) {
+     //加入缓存
+     try {
+          saveDru(url, mergeBitmap);
+     } catch (IOException e) {
+          e.printStackTrace();
+    }
+} 
+```
+这个mergeCallBack方法是用户需要自己实现的图像合并方法，传入一个列表的bitmap，然后返回一个合并图对象，最后我们把这个合并再加入缓存。下次就能直接从缓存中找到了。
+
+接下来的重点就是图像合并的技术了。我在代码里面加入实现了微信和qq的群头像，接下来就简单讲下微信合并的方案，QQ的合并方案，大家可以自己去看代码。
+
+首先我们看下MergeCallBack的实现方法
+```
+
+    @Override
+    public Bitmap merge(List<Bitmap> bitmapArray, Context context, ImageView imageView) {
+        this.context = context;
+
+        // 画布的宽
+        ViewGroup.LayoutParams lp = imageView.getLayoutParams();
+        int tempWidth;
+        int tempHeight;
+        if (lp != null) {
+            tempWidth = dip2px(context, lp.width);
+            tempHeight = dip2px(context, lp.height);
+        } else {
+            //否则给一个默认的高度
+            tempWidth = dip2px(context, 70);
+            tempHeight = dip2px(context, 70);
+        }
+
+
+        return CombineBitmapTools.combimeBitmap(context, tempWidth, tempHeight,
+                bitmapArray);
+    }
+```
+
+再看看combimeBitmap的实现
+```
+    public static Bitmap combimeBitmap(Context context, int combineWidth,
+                                       int combineHeight, List<Bitmap> bitmaps) {
+        if (bitmaps == null || bitmaps.size() == 0)
+            return null;
+
+        if (bitmaps.size() >= 9) {
+            bitmaps = bitmaps.subList(0, 9);
+        }
+
+
+        Bitmap resultBitmap = null;
+        int len = bitmaps.size();
+        // 绘制数据，这里记录所有的绘制坐标。
+        List<CombineBitmapEntity> combineBitmapEntities = CombineNineRect
+                .generateCombineBitmapEntity(combineWidth, combineHeight, len);
+        // 缩略图
+        List<Bitmap> thumbnailBitmaps = new ArrayList<Bitmap>();
+        for (int i = 0; i < len; i++) {
+            thumbnailBitmaps.add(ThumbnailUtils.extractThumbnail(bitmaps.get(i),
+                    (int) combineBitmapEntities.get(i).width,
+                    (int) combineBitmapEntities.get(i).height));
+        }
+        // 合成
+        resultBitmap = getCombineBitmaps(combineBitmapEntities,
+                thumbnailBitmaps, combineWidth, combineHeight);
+
+        return resultBitmap;
+    }
+
+
+    private static Bitmap getCombineBitmaps(
+            List<CombineBitmapEntity> mEntityList, List<Bitmap> bitmaps,
+            int width, int height) {
+        Bitmap newBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+        for (int i = 0; i < mEntityList.size(); i++) {
+            //合并图像
+            newBitmap = mixtureBitmap(newBitmap, bitmaps.get(i), new PointF(
+                    mEntityList.get(i).x, mEntityList.get(i).y));
+        }
+        return newBitmap;
+    }
+```
+最后调用getCombineBitmaps合成图像，合成图像的关键就是通过Bitmap.createBitmap实现。
+```
+    private static Bitmap mixtureBitmap(Bitmap first, Bitmap second,
+                                        PointF fromPoint) {
+        if (first == null || second == null || fromPoint == null) {
+            return null;
+        }
+        Bitmap newBitmap = Bitmap.createBitmap(first.getWidth(),
+                first.getHeight(), Bitmap.Config.ARGB_8888);
+        Canvas cv = new Canvas(newBitmap);
+        cv.drawBitmap(first, 0, 0, null);
+        cv.drawBitmap(second, fromPoint.x, fromPoint.y, null);
+        cv.save(Canvas.ALL_SAVE_FLAG);
+        cv.restore();
+
+        if (first != null) {
+            first.recycle();
+            first = null;
+        }
+        if (second != null) {
+            second.recycle();
+            second = null;
+        }
+
+        return newBitmap;
+    }
+```
+所有关键逻辑已经备注到代码里面了。
+
+如果大家想看完整效果和完整代码，可以点击我的git地址[MutiImgLoader](https://github.com/jinyb09017/MutiImgLoader)。如果大家觉得有帮助，记得star哦
