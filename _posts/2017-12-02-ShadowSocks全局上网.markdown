@@ -33,7 +33,7 @@ Proxifier的客户端[下载地址](https://www.proxifier.com/download.htm)
 
 ![image.png](http://upload-images.jianshu.io/upload_images/2159256-ed81b4b10e481d66.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
-###二、设置rulues
+### 二、设置rulues
 
 ![image.png](http://upload-images.jianshu.io/upload_images/2159256-2732c6e6e1e66d05.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
