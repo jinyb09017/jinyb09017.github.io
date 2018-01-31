@@ -1,0 +1,346 @@
+---
+layout: post
+title: android 登录成功后再跳转到目标界面的思考
+date: 2017-07-06 12:32:24.000000000 +09:00
+categories: android
+tags: android实用工具|高效
+---
+项目中经常有遇到一个典型的需求，就是在用户在需要进入A界面的时候，需要先判断用户是否登录，如果没有登录，则需要先进入登录界面，如果登录成功了，再直接跳转到A界面。
+
+### 需求定义
+所以这里有两个需求： 1、自动跳转到登录界面 2、登录成功后再自动跳转到目标A界面
+
+如果我们直接判断用户有没有登录，提醒用户登录。也没有让用户登录成功后再直接跳转到目标界面，这样的用户体验恐怕是不能满足一个高逼格程序员的要求。那么，我们来思考下，如何才能更加优雅的完成这个工作呢？
+
+当然，在开始之前，我们可以先了解下其他人都是怎么做的，毕竟我们可以站在巨人的肩膀上才能看得更远。
+
+### 思考可行的方案
+首先我们第一个想到的解决方式，就是拦截器。如果我们在进入A界面的时候，可以在操作之前加入一个拦截器的话，岂不是可以做到在进入A界面前的判断呢？
+
+#### 在google之后，找到两个方案。
+A、 [Android拦截器](http://www.jianshu.com/p/1487d72bb745) (可以点击查看)
+
+此方案通过注解。在进入目标界面A时，判断是否有指定的拦截器，如果有，则检验是否满足拦截器要求，不满足，则执行拦截器的处理，处理完成后，通过onActivityResult最后触发invoke的回调方法。
+
+此方案和我们需求略有不同，那么说下此方案存在的缺点：
+1、用了继承的方式,来插入invoke的回调方法。由于java的单继承的特性，如果工程中已经有基类的情况，调整起来比较麻烦。侵入性太高。
+
+2、此方案中，在没有登录的情况下，其实已经进入了目标A页面。相应的初始化都已经执行了。如果没有登录成功，这样工作其实是白做了。如果目标A界面要登录才能进入的话，此方案不符合要求的。
+
+B、我们直接使用路由框架，参考下阿里的ARouter方案，可以看到，我们可以在固定路由上面插入拦截器。这里有一篇文章介绍 [阿里ARouter拦截器使用及源码解析](http://www.jianshu.com/p/c8d7b1379c1b)
+
+看了文章后，发现拦截器实现的非常优雅，但是依然不是我们想要的。因为这个拦截器执行完后，马上会执行目标方法。中间并不会等待。所以我们根本没有办法去执行我们的登录操作。 所以pass了。
+
+我们再回过头来思考，拦截器似乎并不能直接完成我们的需求，因为我们需要插入一个验证行为后（例如进入登录界面），还要执行相应的操作后，保证这个验证行为通过后，才能真正进入到我们的目标界面。
+
+其实如果我们只是单纯的完成这个功能的话，可能大家最容易想到的就是，在进入登录界面的时候，在intent中装载一个目标target的intent.如果登录成功了，就判断是否有目标target，如果有，就跳转到目标target.
+```
+        Intent intent = new Intent(this,LoginActivity.class);
+        Intent target = new Intent(this,OrderDetailActivity.class);
+        intent.putExtra("target",target);
+        startActivity(intent);
+```
+这种方式做起来非常直接，也可理解，但是最明显的问题就是，会导致登录界面多了很多与自己无关的业务判断。那我们继续google看看，有没有类似的做法，并且实现优雅一点的呢？
+
+[Android 登录判断器，登录成功后帮你准确跳转到目标activity](http://blog.csdn.net/xiaochouwangzi188/article/details/49768969) 这篇的访问量比较大，似乎是个比较靠谱的方法。我们来大概分析下它的做法。
+
+```
+public static void interceptor(Context ctx, String target, Bundle bundle, Intent intent) {
+        if (target != null && target.length() > 0) {
+            LoginCarrier invoker = new LoginCarrier(target, bundle);
+            if (getLogin()) {
+                invoker.invoke(ctx);
+            } else {
+                if (intent == null) {
+                    intent = new Intent(ctx, LoginActivity.class);
+                }
+                login(ctx, invoker, intent);
+            }
+        } else {
+            Toast.makeText(ctx, "没有activity可以跳转", 300).show();
+        }
+    }
+
+private static void login(Context context, LoginCarrier invoker, Intent intent) {
+        intent.putExtra(mINVOKER, invoker);
+        intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        context.startActivity(intent);
+    }
+```
+我们看上面的核心代码就是，封装一个LoginCarrier。如果没有登录，则把这个LoginCarrier传入到登录界面。登录成功后，触发invoke()方法。本质上和我们上面的想法差不多。
+
+看完之后，还是觉得实现上不够完美，总觉得有些缺点。例如
+
+1、在登录界面还是侵入了过多的逻辑（这似乎不可避免，但是否可以简洁些呢）
+
+2、扩展性比较差。比方说我要购买某个礼品，需要登录，然后再跳转到充值界面充值完成后再回来。
+
+那到底有没有更好的实现方案呢，谷歌后，发现暂时没有找到可靠的方案了，所以说靠天靠地，不如靠自己，既然找不到合适的方案，那就好好思考下，自己动手来干了。
+
+首先，我们再回过头考虑我们的需求，我们需要执行一个目标方法。但是目标方法需要一个前置的条件满足才能执行，并且这个前置条件可能不只一个，还有就是这个前置条件并不是马上就能完成的。
+
+那我们根据需求抽象出来的数据模型应该是。
+```
+public class CallUnit {
+    //目标行为
+    private Action action;
+    //先进先出验证模型
+    private Queue<Valid> validQueue = new ArrayDeque<>();
+    //上一个执行的valid
+    private Valid lastValid;
+
+}
+```
+那么目标行为action就是一个执行体。负责执行目标方法。
+```
+public interface Action {
+    void call();
+}
+```
+验证操作validQueue保存一个验证队列，Valid的验证模型是
+```
+public interface Valid {
+
+    /**
+     * 是否满足检验器的要求，如果不满足的话，则执行doValid()方法。如果满足，则执行目标action.call
+     * @return
+     */
+    boolean check();
+   //去执行验证前置行为，例如跳转到登录界面。（但并未完成验证。）
+    void doValid();
+}
+
+```
+那么整个逻辑用一幅图表达出来，会比较清楚。
+![执行逻辑](https://upload-images.jianshu.io/upload_images/2159256-91dedfb30a1c140c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+接下来根据图，来讲解代码实现。
+
+第一步，我们需要构造一个CallUnit单元。例如，我们需要跳转到折扣界面，前置是我们必须要登录，并且要有折扣码。
+
+所以这里，我们有两个验证模型，一个是登录，一个是拿到折扣。
+```
+public class DiscountValid implements Valid {
+    private Context context;
+
+    public DiscountValid(Context context) {
+        this.context = context;
+    }
+
+    /**
+     *
+     * @return
+     */
+    @Override
+    public boolean check() {
+        return UserConfigCache.isDiscount(context);
+    }
+
+
+    /**
+     * if check() return false. then doValid was called
+     */
+    @Override
+    public void doValid() {
+         DiscountActivity.start((Activity) context);
+    }
+}
+
+
+public class LoginValid implements Valid {
+    private Context context;
+
+    public LoginValid(Context context) {
+        this.context = context;
+    }
+
+    /**
+     * check whether it login in or not
+     * @return
+     */
+    @Override
+    public boolean check() {
+        return UserConfigCache.isLogin(context);
+    }
+
+
+    /**
+     * if check() return false. then doValid was called
+     */
+    @Override
+    public void doValid() {
+         LoginActivity.start((Activity) context);
+    }
+}
+
+```
+
+然后我们需要构造一个执行体。直接在当前的Activity里面实现Action接口即可。例如我们在MainActivity中实现。
+```
+    @Override
+    public void call() {
+        //这是我们的目标行为
+        OrderDetailActivity.startActivity(MainActivity.this, "1234");
+    }
+```
+接下来，我们就可以构造一个CallUnit对象并进行执行了。
+```
+                CallUnit.newInstance(MainActivity.this)
+                        .addValid(new LoginValid(MainActivity.this))
+                        .addValid(new DiscountValid(MainActivity.this))
+                        .doCall();
+```
+我们来看看doCall到底做了什么？
+```
+    public void doCall(){
+        ActionManager.instance().postCallUnit(this);
+    }
+
+```
+发现，我们是通过ActionManager的单例调用了postCallUnit().我们看下这个单例有啥作用
+
+```
+public class ActionManager {
+
+    static ActionManager instance = new ActionManager();
+
+    public static ActionManager instance() {
+
+        return instance;
+    }
+
+    Stack<CallUnit> delaysActions = new Stack<>();
+    ....
+}
+```
+这个单例维护了一个CallUnit的堆栈，表示我们支持一个目标行为里面再嵌入一个目标行为。但是这个需求恐怕很少会遇到。但是设计上是支持的。
+
+我们再回过头看看，postCallUnit()到底做了啥？
+```
+    /**
+     * 根据条件判断，是否要执行一个action
+     *
+     * @param callUnit
+     */
+    public void postCallUnit(CallUnit callUnit) {
+
+        //清除所有的actions
+        delaysActions.clear();
+        //执行check
+        callUnit.check();
+        //如果全部满足，则直接跳转目标方法
+        if (callUnit.getValidQueue().size() == 0) {
+            callUnit.getAction().call();
+        } else {
+            //加入到延迟执行体中来
+            delaysActions.push(callUnit);
+
+            Valid valid = callUnit.getValidQueue().peek();
+            callUnit.setLastValid(valid);
+            //是否会有后置任务
+            valid.doValid();
+
+        }
+    }
+```
+备注非常清楚，就是判断是否验证条件都满足，如果满足，则直接执行目标方法，如果不满足，则执行doValid方法。并且保存当前valid的引用，以便后面验证valid是否满足条件。如果不满足，是不允许再执行下一轮的验证。
+
+到这里，我们知道，我们已经触发了执行体，并顺利进入了登录验证的执行体。因为登录这个操作需要用户手动触发完成，我们只是引导用户到了登录界面(当然登录操作也可以代码自动完成，那就没有必要跳页面了)，由于我们因为等待用户的输入，我们的验证模型就在这里停下来了，如果登录成功了，我们才需要让整个验证模型再运转起来了，所以验证后，永远少不了手动开启验证模型。
+
+例如我们在登录成功后，需要调用方法CallUnit.reCall()：
+```
+        findViewById(R.id.button).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(LoginActivity.this,"登录成功",Toast.LENGTH_SHORT).show();
+                UserConfigCache.setLogin(LoginActivity.this, true);
+                //这里执行延迟的action方法。
+                CallUnit.reCall();
+                finish();
+            }
+        });
+```
+我们看看CallUnit.reCall()的执行方法
+```
+    public static void reCall(){
+        ActionManager.instance().checkValid();
+    }
+
+    public void checkValid() {
+
+        if (delaysActions.size() > 0) {
+            CallUnit callUnit = delaysActions.peek();
+
+            if (callUnit.getLastValid().check() == false) {
+                throw new ValidException(String.format("you must pass through the %s,and then reCall()", callUnit.getLastValid().getClass().toString()));
+
+            }
+
+            if (callUnit != null) {
+                Queue<Valid> validQueue = callUnit.getValidQueue();
+
+                validQueue.remove(callUnit.getLastValid());
+                //valid已经执行完了，则表示此delay已经检验完了--执行目标方法
+                if (validQueue.size() == 0) {
+                    callUnit.getAction().call();
+                    //把这个任务移出
+                    delaysActions.remove(callUnit);
+                } else {
+
+                    Valid valid = callUnit.getValidQueue().peek();
+                    callUnit.setLastValid(valid);
+                    //是否会有后置任务
+                    valid.doValid();
+                }
+            }
+        }
+    }
+
+
+```
+最终是调用ActionManager.instance().checkValid()的方法，就是判断上一个valid是否执行成功，如果没有成功，则会报出异常。提示必须满足check()为true后，才能执行下一个valid.如果你永远都不想目标行为执行过去，就不要调用CallUnit.reCall()方法即可。如果上一个valid执行成功，则会再调用下一个valid，直到所有的valid都执行完成后，则进入callUnit.getAction().call()的执行。最后进入订单折扣界面了。
+
+ps:其实工程也实现了注解调用的实现。但是前提是所有的检验模型不需要传入额外的参数才行。 具体看代码
+```
+    /**
+     * 通过反射注解来组装(但是这个前提是无参的构造方法才行)
+     *
+     * @param action
+     */
+    public void postCallUnit(Action action) {
+        Class clz = action.getClass();
+        try {
+            Method method = clz.getMethod("call");
+            Interceptor interceptor = method.getAnnotation(Interceptor.class);
+            Class<? extends Valid>[] clzArray = interceptor.value();
+            CallUnit callUnit = new CallUnit(action);
+            for (Class cla : clzArray) {
+                callUnit.addValid((Valid) cla.newInstance());
+            }
+
+            postCallUnit(callUnit);
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
+    }
+
+```
+
+### 演示流程图如下
+
+![只需要进行登录的验证](https://upload-images.jianshu.io/upload_images/2159256-f5fef56d94e06eda.gif?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+![需同时进行登录和优惠券的验证
+](https://upload-images.jianshu.io/upload_images/2159256-eb61449c1b85a498.gif?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+
+----------
+
+
+###  代码地址
+最后放下完整的[代码链接库](https://github.com/jinyb09017/delayActionDemo)，如果对你有帮助，记得star哦

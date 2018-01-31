@@ -1,0 +1,100 @@
+---
+layout: post
+title: handler引用的内存泄露
+date: 2017-08-06 12:32:24.000000000 +09:00
+categories: android
+tags: 源码分析|源码
+---
+通常我们在合适handler进行线程通信的时候，会简单的如下调用
+
+```
+    Handler handler1 = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+
+            tv.setText("haha");
+        }
+    };
+```
+为什么这样调用会存在内存泄露呢？这是因为非静态的内部类（匿名类）会持有外部类对象的引用。为此什么这么说呢，你会发现，我们可以直接在handleMessage中调用外部Activity的引用，因此可以直接调用Activity的tv引用。
+
+所以说handler持有activity。而我们知道Message对象的target持有handler的引用。android应用的整个生命周期靠mainLoop来循环MessageQueue,MessageQueue持有Message的引用。所以如果相应的Message没有处理完的后，例如通过发送一个延时消息
+
+```
+mLeakyHandler.postDelayed(new Runnable() {
+      @Override
+      public void run() { /* ... */ }
+    }, 1000 * 60 * 10);
+```
+
+则在10分钟内，Message都不会被处理，相应的Actiivty也不会释放。
+
+同理，如果这里存在另外一个线程的耗时操作（网络访问），此线程持有handler的引用，如果此线程不结束，也不会释放引用。
+
+
+```
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                doMuchWork();
+                handler.sendEmptyMessage(100);
+
+            }
+        });
+```
+那么我们应该如何使用handler呢？使用静态内部类，或者单独抽取出一个文件来存放Handler类。当然这个时候，是没有外部类的引用。但是我们还是需要用到外部类对象的引用，应该如何处理呢，对，那就是通过一个弱引用。
+
+弱引用的作用是，当垃圾回收的时候，可以直接回收掉。如
+
+```
+    public static class MyHandler extends Handler{
+        WeakReference<Activity> weakReference ;
+        public MyHandler(Activity aty){
+            weakReference = new WeakReference<Activity>(aty);
+        }
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+
+            MainActivity aty = (MainActivity) weakReference.get();
+
+            aty.tv.setText("haha");
+        }
+    }
+```
+还有一点需要注意的是，我们平时使用匿名内部类的时候，如runnable也要需要，他也持有外部类对象的引用，例如我们在onCreate方法中调用
+
+
+```
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+                tv.setText("haha");
+            }
+        });
+}
+```
+那么如果这个runnable对应的Message没有处理完，也会有内存泄露。正确的做法还是声明为一个匿名的内部类。
+
+
+```
+    public static class MyRun implements Runnable{
+        WeakReference<Activity> weakReference ;
+        public MyRun(Activity aty){
+            weakReference = new WeakReference<Activity>(aty);
+        }
+        @Override
+        public void run() {
+            MainActivity aty = (MainActivity) weakReference.get();
+
+            aty.tv.setText("haha");
+        }
+    }
+```
+
