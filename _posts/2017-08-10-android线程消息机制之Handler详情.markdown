@@ -1,6 +1,6 @@
 ---
 layout: post
-title: AsyncTask源码解析
+title: android线程消息机制之Handler详情
 date: 2017-08-10 11:42:24.000000000 +09:00
 categories: android
 tags: 源码分析|源码|handler|Looper|消息机制
