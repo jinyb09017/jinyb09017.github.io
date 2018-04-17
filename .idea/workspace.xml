@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4861632a-37ca-40c5-8a1a-832a153a60da" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/_posts/2018-01-02-small踩坑记录.markdown" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/_posts/Object.assign().markdown" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="abbott.github.io.iws" />
@@ -22,46 +22,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/category/network/index.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="45">
-              <caret line="3" column="0" lean-forward="false" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="12" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="2017-06-05-科学上网.markdown" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/_posts/2017-06-05-科学上网.markdown">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="2017-12-02-ShadowSocks全局上网.markdown" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/_posts/2017-12-02-ShadowSocks全局上网.markdown">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="525">
-              <caret line="35" column="14" lean-forward="false" selection-start-line="35" selection-start-column="14" selection-end-line="35" selection-end-column="14" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="2017-06-06-android国际化.markdown" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/_posts/2017-06-06-android国际化.markdown">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="315">
-              <caret line="21" column="20" lean-forward="false" selection-start-line="21" selection-start-column="20" selection-end-line="21" selection-end-column="20" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="2017-07-06-android 登录成功后再跳转到目标界面的思考.markdown" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/_posts/2017-07-06-android 登录成功后再跳转到目标界面的思考.markdown">
           <provider selected="true" editor-type-id="text-editor">
@@ -92,16 +52,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="2017-08-09-AsyncTask源码解析.markdown" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/_posts/2017-08-09-AsyncTask源码解析.markdown">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="4590">
-              <caret line="306" column="45" lean-forward="false" selection-start-line="306" selection-start-column="45" selection-end-line="306" selection-end-column="45" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="2017-08-10-android线程消息机制之Handler详情.markdown" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/_posts/2017-08-10-android线程消息机制之Handler详情.markdown">
           <provider selected="true" editor-type-id="text-editor">
@@ -112,11 +62,61 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="2018-01-02-small踩坑记录.markdown" pinned="false" current-in-tab="true">
+      <file leaf-file-name="2018-01-02-small踩坑记录.markdown" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/_posts/2018-01-02-small踩坑记录.markdown">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="165">
+            <state relative-caret-position="-2743">
               <caret line="11" column="10" lean-forward="false" selection-start-line="11" selection-start-column="10" selection-end-line="11" selection-end-column="10" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="2017-06-05-Package Control插件管理.markdown" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/_posts/2017-06-05-Package Control插件管理.markdown">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="75">
+              <caret line="5" column="17" lean-forward="false" selection-start-line="5" selection-start-column="12" selection-end-line="5" selection-end-column="17" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="2017-06-06-JavaScript中对象的属性.markdown" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/_posts/2017-06-06-JavaScript中对象的属性.markdown">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="60">
+              <caret line="4" column="22" lean-forward="false" selection-start-line="4" selection-start-column="12" selection-end-line="4" selection-end-column="22" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Object.assign().markdown" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/_posts/Object.assign().markdown">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="65">
+              <caret line="106" column="3" lean-forward="true" selection-start-line="106" selection-start-column="3" selection-end-line="106" selection-end-column="3" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="2017-06-06-java泛型知识.markdown" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/_posts/2017-06-06-java泛型知识.markdown">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="2018-01-02-Android SDK目录及版本号区别.markdown" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/_posts/2018-01-02-Android SDK目录及版本号区别.markdown">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-1016">
+              <caret line="14" column="0" lean-forward="true" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -159,7 +159,6 @@
         <option value="$PROJECT_DIR$/_layouts/category.html" />
         <option value="$PROJECT_DIR$/_posts/2017-06-05-科学上网.markdown" />
         <option value="$PROJECT_DIR$/_posts/2017-06-06-android实用工具精选.markdown" />
-        <option value="$PROJECT_DIR$/_posts/2017-06-05-Package Control插件管理.markdown" />
         <option value="$PROJECT_DIR$/_posts/2017-06-05-HTTP压缩，浏览器是如何解析的.markdown" />
         <option value="$PROJECT_DIR$/_posts/2017-06-05-HTTP 协议中的 Transfer-Encoding.markdown" />
         <option value="$PROJECT_DIR$/_posts/2017-06-06-android国际化.markdown" />
@@ -180,6 +179,9 @@
         <option value="$PROJECT_DIR$/_posts/2017-08-09-AsyncTask源码解析.markdown" />
         <option value="$PROJECT_DIR$/_posts/2017-08-10-android线程消息机制之Handler详情.markdown" />
         <option value="$PROJECT_DIR$/_posts/2018-01-02-small踩坑记录.markdown" />
+        <option value="$PROJECT_DIR$/_posts/2017-06-05-Package Control插件管理.markdown" />
+        <option value="$PROJECT_DIR$/_posts/2018-01-02-Android SDK目录及版本号区别.markdown" />
+        <option value="$PROJECT_DIR$/_posts/Object.assign().markdown" />
       </list>
     </option>
   </component>
@@ -357,7 +359,7 @@
       <workItem from="1505810002414" duration="116000" />
       <workItem from="1512194396714" duration="1107000" />
       <workItem from="1517379926213" duration="1459000" />
-      <workItem from="1523977878287" duration="656000" />
+      <workItem from="1523977878287" duration="1361000" />
     </task>
     <task id="LOCAL-00001" summary="1、初始化博客工程">
       <created>1496634382460</created>
@@ -499,20 +501,41 @@
       <option name="project" value="LOCAL" />
       <updated>1517380920784</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="1、添加文章">
+      <created>1523978560210</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1523978560210</updated>
+    </task>
+    <task id="LOCAL-00022" summary="1、文章修改">
+      <created>1523978794310</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1523978794310</updated>
+    </task>
+    <task id="LOCAL-00023" summary="1、文章添加">
+      <created>1523979059738</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1523979059738</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="48273000" />
+    <option name="totallyTimeSpent" value="48978000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="57" y="23" width="1440" height="807" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32064834" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.39323467" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16853933" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.34691012" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3048951" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -578,7 +601,6 @@
     <MESSAGE value="死链接处理" />
     <MESSAGE value="1、添加tag&#10;2、修改背景等细节" />
     <MESSAGE value="1、添加分类功能" />
-    <MESSAGE value="1、添加文章" />
     <MESSAGE value="1、图片处理" />
     <MESSAGE value="1、js文章添加" />
     <MESSAGE value="1、目录修正" />
@@ -587,7 +609,10 @@
     <MESSAGE value="1、标题修改" />
     <MESSAGE value="1、shadowsocks全局上网" />
     <MESSAGE value="1、添加android分类文章" />
-    <option name="LAST_COMMIT_MESSAGE" value="1、添加android分类文章" />
+    <MESSAGE value="1、添加文章" />
+    <MESSAGE value="1、文章修改" />
+    <MESSAGE value="1、文章添加" />
+    <option name="LAST_COMMIT_MESSAGE" value="1、文章添加" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -602,8 +627,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/README.md" />
-    <entry file="file://$PROJECT_DIR$/_posts/2016-02-15-sample-post.markdown" />
     <entry file="file://$PROJECT_DIR$/_includes/pagination.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -705,10 +728,8 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/_posts/2017-06-06-android实用工具精选.markdown" />
-    <entry file="file://$PROJECT_DIR$/_posts/2017-06-05-Package Control插件管理.markdown" />
     <entry file="file://$PROJECT_DIR$/_posts/2017-06-05-HTTP压缩，浏览器是如何解析的.markdown" />
     <entry file="file://$PROJECT_DIR$/_posts/2017-06-05-HTTP 协议中的 Transfer-Encoding.markdown" />
-    <entry file="file://$PROJECT_DIR$/_posts/2017-06-06-JavaScript中对象的属性.markdown" />
     <entry file="file://$PROJECT_DIR$/_site/index.html" />
     <entry file="file://$PROJECT_DIR$/index.html">
       <provider selected="true" editor-type-id="text-editor">
@@ -747,7 +768,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/_posts/2017-06-06-java泛型知识.markdown" />
     <entry file="file://$PROJECT_DIR$/_includes/side-panel.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="340">
@@ -783,7 +803,7 @@
         <state relative-caret-position="195">
           <caret line="13" column="0" lean-forward="false" selection-start-line="13" selection-start-column="0" selection-end-line="17" selection-end-column="14" />
           <folding>
-            <element signature="n#style#0;n#div#0;n#header#0;n#article#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#header#0;n#article#0;n#!!top" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -864,8 +884,48 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/_posts/2018-01-02-small踩坑记录.markdown">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
+        <state relative-caret-position="-2743">
           <caret line="11" column="10" lean-forward="false" selection-start-line="11" selection-start-column="10" selection-end-line="11" selection-end-column="10" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/_posts/2018-01-02-Android SDK目录及版本号区别.markdown">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1016">
+          <caret line="14" column="0" lean-forward="true" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/_posts/2017-06-06-java泛型知识.markdown">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/_posts/2017-06-06-JavaScript中对象的属性.markdown">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="22" lean-forward="false" selection-start-line="4" selection-start-column="12" selection-end-line="4" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/_posts/2017-06-05-Package Control插件管理.markdown">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="5" column="17" lean-forward="false" selection-start-line="5" selection-start-column="12" selection-end-line="5" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/_posts/Object.assign().markdown">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="65">
+          <caret line="106" column="3" lean-forward="true" selection-start-line="106" selection-start-column="3" selection-end-line="106" selection-end-column="3" />
           <folding />
         </state>
       </provider>
