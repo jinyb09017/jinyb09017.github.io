@@ -1,0 +1,231 @@
+---
+layout: post
+title: small踩坑记录
+date: 2018-01-02 14:32:24.000000000 +09:00
+categories: android
+tags: small-插件化-踩坑记录
+---
+前段时间，调研了插件化的一些相关方案。感觉small的文档比较清晰，而且做到极致裁剪。源码也能够直接看到，被称为是最精简的插件化方案。
+故决定将公司以前的一个组件化的应用进行插件化改造。
+
+虽然demo运行起来很简单，但是在实践的过程中，还是非常曲折。最后在不懈的努力下，终于完成了插件化的集成。下面把集成过程中遇到的一些坑记录
+下来，仅供大家参考。
+
+small踩坑记。。
+
+1、app插件模块的 package 必须和applicationId一致，否则会出错。 报r文件找不到。但是app模块可以单独运行成功。
+
+2、application的理解上存在问题。其实插件在加载的过程中，每个插件如果有application都会加载一次。
+
+某个插件都有相应的application的生命周期和调用。所以插件中应用中，没个插件都有一个application的实例的。
+
+3、app+sub
+
+在RootPlugin中可以看到，所有app和lib模块都有依赖app+stub。但是在打包时候，app+stub会打包到宿主中。这就是所谓的分身。
+这里面一般会放一些权限，受限 Activity,必须在宿主占坑的资源.(例如转场动画，通知栏图标，自定义视图，桌面快捷方式图标)
+
+问题列表
+a.虽然app+stub在编译的时候，给host lib 以及app提供了依赖，但是打包的时候，stub中menifest的权限却没有merge进来。原因还没有找到？？？？
+
+4、DexException: Cannot merge new index 65536 into a non-jumbo instruction
+
+https://stackoverflow.com/questions/26093664/dexexception-cannot-merge-new-index-65536-into-a-non-jumbo-instruction
+http://www.flysnow.org/2016/09/18/android-dex-jumbo-mode.html
+
+
+5、在app依赖lib时。如果两个工程的manifest都有设置application@name 则在编译的时候，merge会报错。可以通过设置 tools:replace="name"来消除错误。small
+是在hookProcessManifest的里面做了这件事情。
+
+另外经过测试theme也是如此 而label,supportsRtl,allowBackup则不需要
+
+6、用到了字体，例如DinTextView在初始化的时候，会加载某个字体RobotoThin。如果这个字段存在覆盖的话，会导致找不到的问题产生。
+
+7、如果使用small中配置buildToAssets = true 表示将插件打包成apk（主要是方便解析和查看），这个时候需要在application的oncreate中指定Small.setLoadFromAssets(BuildConfig.LOAD_FROM_ASSETS); 来显示的赋值。否则会找不到apk的路径
+
+
+8、在bundle.json中配置的时候，如果pkg不符合相应的规范 例如 app. lib. 则需要显示地指定type.否则这个apk不能加载起来
+
+9、After a long analysis, i got solution,platformBuildVersionCode is targetSDKVersion and platformBuildVersionName is version name of targetSDK(like Android 6.0) which are mentioned in build.gradle.
+
+ps:small用到platformBuildVersion这个字段，通过在gradle编译的时候写入，是否该插件包存在资源（这么做，是因为M平台在加入无资源的apk时会crash）
+
+                    // The flag bits are:
+                    //  F    F    F    F    F    F    F    F
+                    // 1111 1111 1111 1111 1111 1111 1111 1111
+                    // ^^^^ ^^^^ ^^^^ ^^^^ ^^^^
+                    //       ABI Flags (20)
+                    //                          ^
+                    //                 nonResources Flag (1)
+                    //                           ^^^ ^^^^ ^^^^
+
+int newFlag = (flags << 11) | versionCode
+
+
+                    //                     platformBuildVersionCode (11) => MAX=0x7FF=4095
+最后发现，统一so，并不做filter后成功。。
+排查方法，直接解压so，看看lib下是否有对应的so。
+
+10、插件单独运行起来ok，但是跳转的时候，会发现ou need to use a Theme.AppCompat theme (or descendant) with this activity.
+解决方法，直接将theme独立成一个lib.style工程。其它工程都的theme定义都去掉。直接依赖此方程即可。。
+
+11、由于以前组件化的时候，是使用的Arouter的方案来加载路由。但是插件化后，只能加载一个模块的路由。这是由路由框架确定的。在application的中调用Arouter.init()后，加载完成后，会打上标志，导致其它插件的路由无法加载成功。
+
+这是需要重写路由加载的部分逻辑...
+
+大概思路说明：
+a、在attachBaseContext方法中通过反射拿到loadApk里面的dexFile。然后遍历并且注册到warehouse中，
+
+这里遇到的问题是：插件 java.lang.IllegalAccessError  原因说明：因为不同的dex中都有加载warehouse这个类。如果dexA引用dexB中的类，就会出现这个问题。所以在编译的时候，考虑用provided的方式。只提供一个依赖即可。
+
+参考资料：http://www.jianshu.com/p/57fc356b9093
+
+ps:发现路由加载好后，可以直接使用arouter的路由即可，不需要做任何调整。
+
+
+12、app host工程不能依赖lib工程，否则会报错。 错误忘记贴出来了。
+
+13、BundleParser: Package com.topstech.saas has mismatched certificates at entry AndroidManifest.xml; ignoring!
+
+修改签名文件后，bundleParser解压会失败。所以所有的插件需要重新打包。。
+
+ps:所有的插件都是用的一套签名认证。
+
+
+14、百度地图在客户插件模块初始化失败。
+
+在插件初始化的时候，拿到的pkg和sh1貌似都不对。如何拿到主应用的pkg和sh1（签名文件的）。 原因是不同application初始化的时候，对应的上下文实际是不一样的。这个要切记了。
+
+
+15、签名问题：各组件编译时使用宿主的release签名，以使得release版本的宿主可以通过比对签名来校验插件。为此在调试运行宿主的时候也使用release签名，避免调试时签名校验失败而中断。
+所以针对14中提到的问题，理论上不应该签名不对的。
+
+解决方法。直接缓存host的context然后在插件初始化的时候，传入即可。  即通过 getApplicationContext()能到宿主的context
+
+关于application关系  参考issuse:https://github.com/wequick/Small/issues/288
+
+
+16、aar的引用不支持 mavenLocal 也不支持compile(name: 'rnfetchblob-0.10.6', ext: 'aar')  导致rn模块的aar加载异常。。
+
+ref:https://github.com/wequick/Small/issues/211
+解决方法：File->New->New Module->Import .JAR/.AAR Package
+
+
+17、由于rn模块使用了一个本地仓库依赖，本地依赖解析了自己的依赖。直接通过16的方法，会导致依赖的依赖无法拿到而报错。----因为打包出来的aar不会包含本aar的相关依赖信息。所以只能进行远程依赖。或者下载好所有的依赖aar
+
+http://blog.csdn.net/u011840744/article/details/50608677
+
+在jcenter上面找到相应的依赖  com.facebook.react:react-native:0.20.1  版本太低。而我们用的是0.45
+
+解决思路：把aar和pom文件上传到公司的服务器。
+
+ps:一定要区分好 buildscript  和 allprojects 的 repositories 需要单独指定
+
+18、rn模块报   package R does not exist.   同样原因，因为pkg 和 applicationId不一致导致的。
+
+19、 java.lang.UnsatisfiedLinkError: couldn't find DSO to load: libreactnativejni.so 经排查，在对应文件夹下 /data/data/com.topstech.saas/files/storage/com.kakao.topsales.rnmodule/lib/x86确实存在这个so文件。。但是却加载不成功
+
+原因分析：SoSource指定了so的加载目录，导致so加载不成功。
+
+解决方法：通过反射SoSource的加载路径，即可正常加载so了
+
+20、java.lang.NoClassDefFoundError: Failed resolution of: Lokhttp3/JavaNetCookieJar
+
+在rxlib添加 com.squareup.okhttp3:okhttp-urlconnection:3.4.1 依赖即可。原因未知。。有可能是跟RNFetchBlob里面的版本冲突导致。由于RNFetchBlob的源码没有。暂时做此猜测
+
+
+21、在真机上测试，发现找不到so。并且so路径也没有加入到目录。
+
+原因是small会根据我手机的架构找对应的so。而我的手机是arm64-8v.并不会做所谓的降级处理。加上这个对应的构架即可了
+
+
+22、经常遇到编译不通过的原因。。
+问题终于找到，还是下载依赖时候的网络问题。因为默认使用了代理，会导致依赖内网的aar下载失败。。因为现在我们的应用依赖了不少内网的aar。切记了，很惨的教训。
+
+
+23、如果有两个工程都在执行gradle指令。如果一个阻塞，会导致别个一个也处于阻塞状态 。。切记了。
+
+
+24、java.lang.UnsatisfiedLinkError: dlopen failed: "/data/data/com.topstech.saas/files/storage/com.rxlib.rxlib/lib/armeabi-v7a/libjnimain.so" is 32-bit instead of 64-bit
+
+原因是因为：64位的android机上，会有32位的虚拟机和64位的虚拟机，在启动apk的时候，虚拟机会根据apk中的so的位数启动对应的虚拟机。解决方法是在宿主中加入一个32位的so即可。
+
+参考、；https://github.com/singwhatiwanna/dynamic-load-apk/issues/113
+
+
+25、个人模块下rn的本地图片无法显示。。
+原因：是因为我们工程是通过require来引用图片，还这种引用是最后通过assets目录下去查找的。
+解决方法：把rn下res目录的资源文件放到宿主中即可。
+
+参考文章：http://www.jianshu.com/p/0866a1e0dff4
+
+
+26、集成极光后，会出现退出主页后再进入，报错
+explicit activity class {com.kakao.topsales.customer/com.kakao.topsales.activity.HomeConsultantActivity}; have you declared this activity in your AndroidManifest.xml?
+
+发现pkg com.kakao.topsales.customer的指向明显不正确。初步怀疑路由加载不正确。
+
+重新整理路由启动的逻辑，解决问题。
+
+27、Execution failed for task ':app.rn:transformClassesWithMultidexlistForRelease'.
+> java.io.IOException: The output jar is empty. Did you specify the proper '-keep' options?
+
+
+莫名其妙的问题:可能是编译不稳定导致的。。。执行clean等操作后正常
+
+总结：遇到编译不稳定的报错，建议clean后再重新执行即可。
+
+
+
+28、插件全局更新后，第一次启动的时候，crash.
+
+java.lang.RuntimeException: Unable to instantiate receiver cn.jpush.android.service.PushReceiver: java.lang.ClassNotFoundException: Didn't find class "cn.jpush.android.service.PushReceiver" on path: DexPathList[[zip file "/data/app/com.topstech.saas-UvfzIh10TH2Yr-fNTnGb6g==/base.apk"],nativeLibraryDirectories=[/data/app/com.topstech.saas-UvfzIh10TH2Yr-fNTnGb6g==/lib/x86, /system/fake-libs, /data/app/com.topstech.saas-UvfzIh10TH2Yr-fNTnGb6g==/base.apk!/lib/x86, /system/lib, /system/vendor/lib]]
+
+原因是，首次安装完后，启动时,apk对应的资源没有加入到classloader.
+
+或者杀掉进程后（模拟器会自动重启），再启动，也会报和上面一样的错误。
+
+原因同样是，应用在没有加载插件时，就提前启动了service。导致找不到class.
+
+
+最后解决方案是=》把极光相关的数据放入到app+的分身中，极将其打包到base.apk中。这样系统启动的时候，极光相关的资源已经加载到classloader。问题得到解决。
+
+29、打包出来的apk无法通过as自带的解析工具解析 resource.arsc   (暂时不是问题，不需要解决。)
+PackageChunk contains an unexpected chunk: class com.google.devrel.gmscore.tools.apk.arsc.LibraryChunk
+
+
+30、有个奇怪的问题，在8.0的模拟器上下载完成跳转到安装界面（应用进入后台会会处于dead状态，这里会突然重启），此时再点击取消返回后，会crash.
+
+原因中在升级新包的设置，默认设置了进行更新，打上标志后。在应用进入后台的时候，会kill自己导致。去掉此标志即可。
+
+31、在lib包中引用的aar存在activtiy的显示调用的时候，会出现因为manifest.xml中没有存在此声明，导致无法调用。即stub的占桩也没有起作用。
+
+原因：在对应的lib的manifest.xml文件中添加对应的声明即可。
+
+32、发现调用photoselect后界面卡死。
+
+原因：在lib包中不能使用anim的转场动画设置。。
+解决方法：将此依赖引用添加到stub中即可解决问题。
+
+
+33、从客户详情到客户跟进crash.
+原因：是升级了arouter后，序列化方法变化。导致序列化一直为空。
+解决：实现序列化方法即可。。----本质是因为升级arouter后导致的问题。
+
+
+34、android N对就的系统，限制了系统么有库的调用。导致出现如下问题。
+
+java.lang.UnsatisfiedLinkError: dlopen failed: library "/system/lib/libimagepipeline.so" needed or dlopened by "/system/lib/libnativeloader.so" is not accessible for the namespace "classloader-namespace"
+
+
+从Android N开始，本地库只能引用公共的NDK API，系统将阻止应用动态连接非NDK平台的so库。Android 7.0 行为变更 中指出如果您的应用使用动态链接到私有平台 API 的第三方库，您可能也会看到上述错误 logcat 输出。
+
+考虑到rn的实用性和兼容性，以及导致包过大的问题。因此考虑将rn换回原生的内容。
+
+
+35、lib模块在删除资源后，需要清理public.txt文件进行重新生成。
+
+public.txt保留当前文件的资源引用。便于在宿主打包的时候，剥离这些资源文件。减少体积。
+
+
+
+ 
