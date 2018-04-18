@@ -6,24 +6,34 @@ layout: default
 
 <script>
 
-//    console.log(window);
+    //    console.log(window);
     //通过js代码控制显示摘要数据
-    window.onload = function () {
-        var nodes = window.document.getElementsByClassName("excerpt1");
-        var pnodes = window.document.getElementsByClassName("excerpt");
-        console.log("------------" + nodes.length)
-        for(var i=0;i<nodes.length;i++){
-            var node = nodes[i];
-            var pnode = pnodes[i];
-//            console.log(node.innerText);
-//            console.log(node);
-
-            pnode.innerText = node.innerText.substr(0,140)+"..."
-        }
-    }
+    //    window.onload = function () {
+    //        var nodes = window.document.getElementsByClassName("excerpt1");
+    //        var pnodes = window.document.getElementsByClassName("excerpt");
+    //        console.log("------------" + nodes.length)
+    //        for(var i=0;i<nodes.length;i++){
+    //            var node = nodes[i];
+    //            var pnode = pnodes[i];
+    ////            console.log(node.innerText);
+    ////            console.log(node);
+    //
+    //            pnode.innerText = node.innerText.substr(0,140)+"..."
+    //        }
+    //    }
 
 </script>
+<style>
+    .line{
 
+        overflow : hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 4;
+        -webkit-box-orient: vertical;
+    }
+
+</style>
 <ul style="list-style-type: none;margin-left: 0">
 
     {% for post in site.categories[page.category] %}
@@ -34,8 +44,8 @@ layout: default
     <li>
         <h2 class="post-link post-list__post-title post-title"><a href="{{ post.url }}" title="{{ post.title }}">{{
             post.title }}</a></h2>
-        <p class="excerpt"></p>
-        <p class="excerpt1" style="display: none">{{post.content}}</p>
+        <p class="excerpt line" >{{post.content}}</p>
+
         <div class="post-list__meta">
             <time datetime="2017-06-06 11:32:24 +0800" class="post-list__meta--date date">2017-06-06
             </time>

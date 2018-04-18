@@ -11,6 +11,7 @@ tags: 网站搭建|个人博客
 
 [Abbott的博客](https://jinyb09017.github.io/)就是我个人花了一天时间实现的博客系统，接下来，我把整个博客搭建的过程记录下来，希望大家能够搭建一个属于你自己的博客网站。
 
+
 ![image](http://note.youdao.com/yws/public/resource/9c0aa2797b78886ad1cdf66d45169a4a/xmlnote/98E26220F077461F9199458815E2D855/7077)
 ### 一、在本地搭建一个jekyll环境
 
