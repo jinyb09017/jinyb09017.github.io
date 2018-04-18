@@ -4,10 +4,56 @@ layout: default
 
 <h1>{{ page.title }}</h1>
 
-<ul>
+<script>
+
+//    console.log(window);
+    //通过js代码控制显示摘要数据
+    window.onload = function () {
+        var nodes = window.document.getElementsByClassName("excerpt1");
+        var pnodes = window.document.getElementsByClassName("excerpt");
+        console.log("------------" + nodes.length)
+        for(var i=0;i<nodes.length;i++){
+            var node = nodes[i];
+            var pnode = pnodes[i];
+//            console.log(node.innerText);
+//            console.log(node);
+
+            pnode.innerText = node.innerText.substr(0,140)+"..."
+        }
+    }
+
+</script>
+
+<ul style="list-style-type: none;margin-left: 0">
+
     {% for post in site.categories[page.category] %}
+    <!--<li>-->
+    <!--{{ post.date | date: "%B %d, %Y" }}: <a href="{{ post.url }}">{{ post.title }}</a>-->
+    <!--</li>-->
+
     <li>
-        {{ post.date | date: "%B %d, %Y" }}: <a href="{{ post.url }}">{{ post.title }}</a>
+        <h2 class="post-link post-list__post-title post-title"><a href="{{ post.url }}" title="{{ post.title }}">{{
+            post.title }}</a></h2>
+        <p class="excerpt"></p>
+        <p class="excerpt1" style="display: none">{{post.content}}</p>
+        <div class="post-list__meta">
+            <time datetime="2017-06-06 11:32:24 +0800" class="post-list__meta--date date">2017-06-06
+            </time>
+            {% if site.leancloud.enable %}
+				<span id="/2017/06/java%E6%B3%9B%E5%9E%8B%E7%9F%A5%E8%AF%86/" class="leancloud_visitors"
+                      data-flag-title="Java泛型知识">
+				 <span class="post-meta-divider tags"></span>
+				 <span class="post-meta-item-text tags"> 阅读量:  </span>
+				 <span class="leancloud-visitors-count tags"></span>
+				</span>
+            {% endif %}
+            <span class="post-list__meta--tags tags">{{ post.tags }}</span><a class="btn-border-small"
+                                                                              href="{{ post.url }}">继续阅读</a>
+        </div>
+        <hr class="post-list__divider"/>
     </li>
+
     {% endfor %}
+
+
 </ul>
